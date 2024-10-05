@@ -140,20 +140,28 @@ function removeFromCart(index) {
 
 
 function sendCartToBot() {
-    const telegramUrl = `https://api.telegram.org/bot6275254498:AAE430Olw0JiSfiyXJWhkzji71lxORJCUKI/sendMessage?chat_id=958530718&text=text`;
+    const cartItems = req.body.items; // Получаем товары из запроса
+    const userId = req.body.userId; // Получаем ID пользователя, если нужно
+
+    const message = `Пользователь хочет купить:\n` + cartItems.map(item => `${item.name} - ${item.price}`).join('\n');
+
+    // Здесь вам нужно будет использовать ваш Telegram Bot API, чтобы отправить сообщение
+    const chatId = '958530718'; // Укажите ID чата или используйте API для получения его
+    const TOKEN = '6275254498:AAE430Olw0JiSfiyXJWhkzji71lxORJCUKI';
+    const telegramUrl = `https://api.telegram.org/bot${TOKEN}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent(message)}`;
 
     fetch(telegramUrl)
-      .then(response => {
-          if (response.ok) {
-              res.json({ message: 'Товары успешно отправлены в чат!' });
-          } else {
-              res.json({ message: 'Ошибка при отправке товаров в чат.' });
-          }
-      })
-      .catch(error => {
-          console.error('Ошибка:', error);
-          res.json({ message: 'Ошибка при отправке товаров в чат.' });
-      });
+        .then(response => {
+            if (response.ok) {
+                res.json({ message: 'Товары успешно отправлены в чат!' });
+            } else {
+                res.json({ message: 'Ошибка при отправке товаров в чат.' });
+            }
+        })
+        .catch(error => {
+            console.error('Ошибка:', error);
+            res.json({ message: 'Ошибка при отправке товаров в чат.' });
+        });
 }
 
 
