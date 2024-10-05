@@ -113,7 +113,7 @@ app.post('/send-cart', (req, res) => {
 
   // Здесь вам нужно будет использовать ваш Telegram Bot API, чтобы отправить сообщение
   const chatId = '958530718'; // Укажите ID чата или используйте API для получения его
-  const telegramUrl = `https://api.telegram.org/bot${TOKEN}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent(message)}`;
+  const telegramUrl = `https://api.telegram.org/bot6275254498:AAE430Olw0JiSfiyXJWhkzji71lxORJCUKI/sendMessage?chat_id=958530718&text=text`;
 
   fetch(telegramUrl)
       .then(response => {
