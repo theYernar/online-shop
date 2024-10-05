@@ -140,21 +140,22 @@ function removeFromCart(index) {
 
 
 function sendCartToBot() {
-    const cartItems = JSON.parse(localStorage.getItem('cart')) || []; // Получаем товары из корзины
+    const telegramUrl = `https://api.telegram.org/bot6275254498:AAE430Olw0JiSfiyXJWhkzji71lxORJCUKI/sendMessage?chat_id=958530718&text=text`;
 
-    fetch('/send-cart', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({ items: cartItems }) // Отправляем товары в формате JSON
-    })
-    .then(response => response.json())
-    .then(data => {
-        alert(data.message); // Сообщение о статусе
-    })
-    .catch(error => console.error('Ошибка:', error));
+    fetch(telegramUrl)
+      .then(response => {
+          if (response.ok) {
+              res.json({ message: 'Товары успешно отправлены в чат!' });
+          } else {
+              res.json({ message: 'Ошибка при отправке товаров в чат.' });
+          }
+      })
+      .catch(error => {
+          console.error('Ошибка:', error);
+          res.json({ message: 'Ошибка при отправке товаров в чат.' });
+      });
 }
+
 
 // Функция для закрытия модального окна
 function closeProductModal() {
