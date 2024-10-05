@@ -82,7 +82,7 @@ app.get('/users', (req, res) => {
 app.post('/add-product', upload, (req, res) => {
   const { name, price } = req.body;
   const images = req.files.map(file => `/uploads/${file.filename}`).join(','); // Получаем пути к загруженным изображениям и объединяем их строкой
-
+  
   const query = `INSERT INTO products (name, price, images) VALUES (?, ?, ?)`;
   db.run(query, [name, price, images], (err) => {
     if (err) {
@@ -91,6 +91,7 @@ app.post('/add-product', upload, (req, res) => {
     res.redirect('/');
   });
 });
+
 
 // Удаление товара
 app.post('/delete-product/:id', (req, res) => {
