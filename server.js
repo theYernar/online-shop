@@ -7,12 +7,13 @@ const app = express();
 const port = 8888;
 
 // Инициализация базы данных SQLite
-const db = new sqlite3.Database('onlineShopDB.sqlite', (err) => {
+const db = new sqlite3.Database('./onlineShopDB.sqlite', (err) => {
   if (err) {
     return console.error(err.message);
   }
   console.log('Connected to the SQLite database.');
 });
+
 
 // Создание таблицы "products" при запуске приложения
 db.run(`
