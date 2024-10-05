@@ -108,12 +108,12 @@ app.post('/delete-product/:id', (req, res) => {
 app.post('/send-cart', (req, res) => {
   const cartItems = req.body.items; // Получаем товары из запроса
   const userId = req.body.userId; // Получаем ID пользователя, если нужно
-
+  const TOKEN = '6275254498:AAE430Olw0JiSfiyXJWhkzji71lxORJCUKI';
   const message = `Пользователь хочет купить:\n` + cartItems.map(item => `${item.name} - ${item.price}`).join('\n');
 
   // Здесь вам нужно будет использовать ваш Telegram Bot API, чтобы отправить сообщение
   const chatId = '958530718'; // Укажите ID чата или используйте API для получения его
-  const telegramUrl = `https://api.telegram.org/bot${'6275254498:AAE430Olw0JiSfiyXJWhkzji71lxORJCUKI'}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent(message)}`;
+  const telegramUrl = `https://api.telegram.org/bot${TOKEN}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent(message)}`;
 
   fetch(telegramUrl)
       .then(response => {
