@@ -12,6 +12,23 @@ function openSelectProductModal(){
 }
 
 
+function sendCartToBot() {
+    const cartItems = JSON.parse(localStorage.getItem('cart')) || []; // Получаем товары из корзины
+
+    fetch('/send-cart', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ items: cartItems }) // Отправляем товары в формате JSON
+    })
+    .then(response => response.json())
+    .then(data => {
+        alert(data.message); // Сообщение о статусе
+    })
+    .catch(error => console.error('Ошибка:', error));
+}
+
 function openModal(imageUrl, productName, productPrice) {
     // Установить изображение и заголовок
     document.getElementById('modal-image').src = imageUrl;
