@@ -138,6 +138,24 @@ function removeFromCart(index) {
     updateCartDisplay(); // Обновляем корзину после удаления
 }
 
+
+function sendCartToBot() {
+    const cartItems = JSON.parse(localStorage.getItem('cart')) || []; // Получаем товары из корзины
+
+    fetch('/send-cart', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ items: cartItems }) // Отправляем товары в формате JSON
+    })
+    .then(response => response.json())
+    .then(data => {
+        alert(data.message); // Сообщение о статусе
+    })
+    .catch(error => console.error('Ошибка:', error));
+}
+
 // Функция для закрытия модального окна
 function closeProductModal() {
     document.getElementById('product-modal').style.display = 'none';
