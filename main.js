@@ -3,7 +3,6 @@ const sqlite3 = require('sqlite3').verbose();
 const bodyParser = require('body-parser');
 const multer = require('multer');
 const path = require('path');
-const axios = require('axios'); // для отправки данных боту
 const TelegramBot = require('node-telegram-bot-api'); // Telegram Bot API
 const dotenv = require('dotenv');
 
